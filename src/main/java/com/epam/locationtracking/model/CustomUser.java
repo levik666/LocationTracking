@@ -45,7 +45,7 @@ public class CustomUser{
 
     private Set<GrantedAuthority> defaultUserRole(){
         final Set<GrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(UserRoles.USER.name()));
+        roles.add(new SimpleGrantedAuthority(UserRoles.ROLE_USER.name()));
         return roles;
     }
 

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @RequestMapping("/")
-    @Secured("ROLE_USER")
     public String index() {
         return "Greetings from Spring Boot!";
     }
