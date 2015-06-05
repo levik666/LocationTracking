@@ -1,0 +1,9 @@
+db.createUser(
+    {
+      user: "jiranotific",
+      pwd: "rt6D@opY",
+      roles: [
+         { role: "readWrite", db: "locationtracking" }
+      ]
+    }
+)

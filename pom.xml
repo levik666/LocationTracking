@@ -17,6 +17,7 @@
         <guava.version>18.0</guava.version>
         <aspectjrt.version>1.8.5</aspectjrt.version>
 
+        <mongo.java.driver.version>3.0.2</mongo.java.driver.version>
         <mockito.core.version>2.0.7-beta</mockito.core.version>
         <cpsuite.version>1.2.5</cpsuite.version>
 
@@ -47,6 +48,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
             <version>${spring.boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo.java.driver.version}</version>
         </dependency>
 
         <dependency>

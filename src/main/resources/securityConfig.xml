@@ -9,20 +9,18 @@
 
        <security:global-method-security jsr250-annotations="enabled" />
 
+        <bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
+
        <security:http auto-config="true">
-              <security:intercept-url pattern="/**" access="ROLE_USER" />
+              <security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+              <security:intercept-url pattern="/registration" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+           <security:intercept-url pattern="/location" access="ROLE_USER" />
        </security:http>
 
        <security:authentication-manager>
               <security:authentication-provider user-service-ref="userDetailsServiceImpl">
-                     <security:password-encoder hash="sha"/>
+                     <security:password-encoder ref="passwordEncoder"/>
               </security:authentication-provider>
-              <!--<security:authentication-provider>
-                  <security:password-encoder hash="sha"/>
-                  <security:user-service>
-                      <security:user name="levik" authorities="ROLE_USER" password="b3daa77b4c04a9551b8781d03191fe098f325e67"/>
-                  </security:user-service>
-              </security:authentication-provider>-->
        </security:authentication-manager>
 
 </beans>

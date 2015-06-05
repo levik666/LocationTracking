@@ -1,13 +1,15 @@
-package com.epam.locationtracking.model;
+package com.epam.locationtracking.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.HashSet;
 import java.util.Set;
 
+@Document(collection = "users")
 public class CustomUser{
 
+    @Id
     private String login;
     private String password;
     private Set<GrantedAuthority> roles;
@@ -37,15 +39,6 @@ public class CustomUser{
     }
 
     public Set<GrantedAuthority> getRoles() {
-        if (roles == null || roles.isEmpty()){
-            roles = defaultUserRole();
-        }
-        return roles;
-    }
-
-    private Set<GrantedAuthority> defaultUserRole(){
-        final Set<GrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(UserRoles.ROLE_USER.name()));
         return roles;
     }
 

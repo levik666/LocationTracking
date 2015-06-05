@@ -1,4 +1,4 @@
-package com.epam.locationtracking.model;
+package com.epam.locationtracking.entity;
 
 public enum UserRoles {
     ROLE_ADMIN,
