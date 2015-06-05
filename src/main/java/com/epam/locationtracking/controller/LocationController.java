@@ -1,15 +1,27 @@
 package com.epam.locationtracking.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.epam.locationtracking.dto.PointDTO;
+import com.epam.locationtracking.facades.LocationFacades;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.security.Principal;
+import java.util.List;
+
+@RestController("/location")
 public class LocationController {
 
-    @RequestMapping(value = "/location", method = RequestMethod.GET)
-    public @ResponseBody String location() {
-        return "Stub users locations";
+    @Autowired
+    private LocationFacades locationFacades;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody
+    List<PointDTO> location(Principal principal) {
+        return locationFacades.getLocations(principal.getName());
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void addLocationPoint(@RequestBody PointDTO point, Principal principal) {
+        locationFacades.add(point, principal.getName());
     }
 }
