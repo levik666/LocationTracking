@@ -6,9 +6,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/context
-      http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+      http://www.springframework.org/schema/context/spring-context.xsd 
+      http://www.springframework.org/schema/aop 
+      http://www.springframework.org/schema/aop/spring-aop.xsd 
+      http://www.springframework.org/schema/security 
+      http://www.springframework.org/schema/security/spring-security.xsd
+      http://www.springframework.org/schema/util 
+      http://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:component-scan base-package="com.epam.locationtracking" />
+    
+    <context:property-placeholder location="classpath:email.properties" />
 
     <aop:aspectj-autoproxy />
 
@@ -18,35 +26,28 @@
 		<property name="protocol" value="${mail.server.protocol}" />
 		<property name="username" value="${mail.server.username}" />
 		<property name="password" value="${mail.server.password}" />
-		<property name="javaMailProperties">
-			<util:properties location="classpath:javamail.properties" />
-		</property>
 	</bean>
 	
 	<!-- THYMELEAF: Template Resolver for email templates -->
-	<bean id="emailTemplateResolver" class="org.thymeleaf.templateresolver.ClassLoaderTemplateResolver">
-	  <property name="prefix" value="mail/" />
+	<bean id="emailTemplateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+	  <property name="prefix" value="/templates/" />
+	  <property name="suffix" value=".html" />
 	  <property name="templateMode" value="HTML5" />
 	  <property name="characterEncoding" value="UTF-8" />
-	  <property name="order" value="1" />
 	</bean>
  
-	<!-- THYMELEAF: Template Resolver for webapp pages   -->
-	<bean id="webTemplateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-	  <property name="prefix" value="/WEB-INF/templates/" />
-	  <property name="templateMode" value="HTML5" />
-	  <property name="characterEncoding" value="UTF-8" />
-	  <property name="order" value="2" />
-	</bean>
- 
-	<!-- THYMELEAF: Template Engine (Spring3-specific version) -->
-	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+	<!-- THYMELEAF: Template Engine -->
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
 	  <property name="templateResolvers">
 	    <set>
 	      <ref bean="emailTemplateResolver" />
-	      <ref bean="webTemplateResolver" />
 	    </set>
 	  </property>
+	</bean>
+	
+	<bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+  		<property name="templateEngine" ref="templateEngine" />
+  		<property name="characterEncoding" value="UTF-8" />
 	</bean>
 
 </beans>

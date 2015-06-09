@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title th:remove="all">Insert title here</title>
+</head>
+<body>
+	<div class="header">
+		<div class="logo"><img src=""></div>
+		<div><h1>Welcome to LocationTracker</h1></div>
+	</div>
+	<div class="content">
+	<p th:text="${userName}"></p>
+	<p th:text="${subscriptionDate}"></p>
+	<p>
+		Thank you for registration on locationtracker.com <br>
+		Please click on link below to activation your account
+	</p>
+	<img src="">
+	<p>
+		Email confirmation<br>
+		Please click on the link below to activate your account:<br>
+	</p>
+	<p th:text="${confirmationLink}"></p>
+	<p>
+		If you didn't request this email or have no idea why you received it, please ignore it. It might have been a mistake from someone else.
+	</p>
+	</div>
+	<div class="footer">
+		<p>Best regards from  Location Tracker Team</p>
+	</div>
+</body>
+</html>
